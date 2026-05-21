@@ -70,13 +70,13 @@ graph TD
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/your-username/DotnetBroker.git
-    cd DotnetBroker
+    git clone https://github.com/ductai202/VortexMQ.git
+    cd VortexMQ
     ```
 
 2.  **Build the solution**
     ```bash
-    dotnet build DotnetBroker.sln
+    dotnet build DotnetBroker/DotnetBroker.sln
     ```
 
 ### Running the Broker
@@ -84,7 +84,7 @@ graph TD
 Start the central `BrokerServer` (KAdmin). By default, it binds to `127.0.0.1:10000` and stores persistence data in the `./broker_data` directory.
 
 ```bash
-dotnet run --project src/DotnetBroker.Server
+dotnet run --project DotnetBroker/src/DotnetBroker.Server
 ```
 *(Optional: Use `--port <port>` and `--data <path>` to customize).*
 
@@ -94,7 +94,7 @@ Open a new terminal and start a Consumer. You must specify its local callback po
 
 ```bash
 # Syntax: dotnet run --project <project> -- <callback-port> <topic> <group-id> <mode>
-dotnet run --project src/DotnetBroker.Consumer -- 10002 1 100 push
+dotnet run --project DotnetBroker/src/DotnetBroker.Consumer -- 10002 1 100 push
 ```
 
 ### Running a Producer
@@ -103,7 +103,7 @@ Open another terminal and start a Producer. Specify its local callback port and 
 
 ```bash
 # Syntax: dotnet run --project <project> -- <callback-port> <topic>
-dotnet run --project src/DotnetBroker.Producer -- 10001 1
+dotnet run --project DotnetBroker/src/DotnetBroker.Producer -- 10001 1
 ```
 
 Once connected, you can type messages directly into the Producer's terminal. Hit `Enter` to publish. You will see the messages instantly appear in the Consumer's terminal!
@@ -116,13 +116,13 @@ DotnetBroker includes a comprehensive test suite (Unit and Integration) utilizin
 
 **Run the full test suite:**
 ```bash
-dotnet test DotnetBroker.sln
+dotnet test DotnetBroker/DotnetBroker.sln
 ```
 
 **Run Performance Benchmarks:**
 Benchmarks measure raw in-memory throughput and serialization latency using `BenchmarkDotNet`. They *must* be run in Release mode.
 ```bash
-dotnet run -c Release --project tests/DotnetBroker.Benchmarks
+dotnet run -c Release --project DotnetBroker/tests/DotnetBroker.Benchmarks
 ```
 
 ---
